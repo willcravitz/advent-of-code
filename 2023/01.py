@@ -1,21 +1,21 @@
 # ===== PART 1 ===== #
 
-def first_digit(code: str):
+def get_first_digit(code: str) -> str:
     for char in code:
         if char.isdigit():
             return char
 
-def last_digit(code: str):
+def get_last_digit(code: str) -> str:
     for char in code[::-1]:
         if char.isdigit():
             return char
         
-def calibration_code(code: str):
-    digit1 = first_digit(code)
-    digit2 = last_digit(code)
+def calibration_code(code: str) -> int:
+    digit1 = get_first_digit(code)
+    digit2 = get_last_digit(code)
     return int(digit1 + digit2)
 
-def part_one():
+def part_one() -> None:
     codes = open("input.txt").read().splitlines()
     calibrations = [calibration_code(code) for code in codes]
     print(sum(calibrations))
@@ -36,7 +36,7 @@ number_words = {
         "nine": 9
     }
 
-def get_first_num(code: str):
+def get_first_num(code: str) -> str:
     for i in range(len(code)):
         if code[i].isdigit():
             return code[i]
@@ -45,7 +45,7 @@ def get_first_num(code: str):
                 return str(value)
     return code
 
-def get_last_num(code: str):
+def get_last_num(code: str) -> str:
     for i in range(len(code) - 1, -1, -1):
         if code[i].isdigit():
             return code[i]
@@ -54,12 +54,12 @@ def get_last_num(code: str):
                 return str(value)
     return code
 
-def calibration_code_with_words(code: str):
+def calibration_code_with_words(code: str) -> int:
     digit1 = get_first_num(code)
     digit2 = get_last_num(code)
     return int(digit1 + digit2)
 
-def part_two():
+def part_two() -> None:
     codes = open("input.txt").read().splitlines()
     calibrations = [calibration_code_with_words(code) for code in codes]
     print(sum(calibrations))
