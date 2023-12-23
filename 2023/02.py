@@ -3,7 +3,6 @@ import re
 # ===== PART 1 ===== #
 
 game_pattern = r'Game (\d+): (\w.+)'
-cubes_pattern = r'(\d+) (\w+)'
 
 def get_game_id(line: str) -> int:
     match = re.search(game_pattern, line)
@@ -22,15 +21,13 @@ def get_min_cubes(line: str) -> dict[str, int]:
         min_cubes = {}
         for cube_set in cube_sets:
             for cube in cube_set:
-                match = re.search(cubes_pattern, cube)
-                if match:
-                    num, color = match.groups()
-                    # add to the dict if largest instance of the color
-                    if color not in min_cubes:
+                num, color = cube.split()
+                # add to the dict if largest instance of the color
+                if color not in min_cubes:
+                    min_cubes[color] = int(num)
+                else:
+                    if min_cubes[color] < int(num):
                         min_cubes[color] = int(num)
-                    else:
-                        if min_cubes[color] < int(num):
-                            min_cubes[color] = int(num)
         return min_cubes
     return None
 
